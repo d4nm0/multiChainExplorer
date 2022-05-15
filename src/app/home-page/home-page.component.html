@@ -1,0 +1,9 @@
+<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+<input type="text" [(ngModel)]="addr" placeholder="adresse MetaMask">
+<button (click)="searchAddr()">Start</button><br>
+<span *ngIf="etherValueAddr">{{etherValueAddr}} ETH</span><br>
+<ng-container *ngIf="erc20List" >token ERC 20:<br><span *ngFor="let item of erc20List">{{item.value}}&nbsp;{{item.tokenSymbol}}<br></span></ng-container>
+<span *ngIf="avaxAmount">{{avaxAmount}} AVAX</span><br>
+<ng-container *ngIf="arrayofContractAvaxERC20" >token AVAX ERC 20 :<br><span *ngFor="let item of arrayofContractAvaxERC20">{{item.value}}&nbsp;{{item.symbol}}<br></span></ng-container>
+<span *ngIf="BnbAmount">{{BnbAmount}} BNB</span><br>
+<ng-container *ngIf="arrayofContractBnbBep20" >token BNB BEP 20 :<br><span *ngFor="let item of arrayofContractBnbBep20">{{item.value}}&nbsp;{{item.symbol}}<br></span></ng-container>
