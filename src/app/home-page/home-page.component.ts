@@ -23,7 +23,8 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit(): void {
     // this.walletWonnected = localStorage.getItem("WEB3_CONNECT_CACHED_PROVIDER")
-
+    console.log(localStorage.getItem("WEB3_CONNECT_CACHED_PROVIDER"))
+    if(localStorage.getItem("WEB3_CONNECT_CACHED_PROVIDER"))
     this.Web3Service.getAccounts().then((response :any) => {
       if (response){
         this.walletWonnected = true
@@ -142,9 +143,10 @@ export class HomePageComponent implements OnInit {
     // and does not allow to re-scan the QR code with a new wallet.
     // Depending on your use case you may want or want not his behavior.
     //  this.Web3Service.web3Modal.clearCachedProvider();
-    //  this.Web3Service.disconnectWallet()
+    localStorage.removeItem("WEB3_CONNECT_CACHED_PROVIDER")
+     this.Web3Service.disconnectWallet()
     //  this.walletWonnected = false
-    //  window.location.reload();
+     window.location.reload();
     // provider = null;
   }
 

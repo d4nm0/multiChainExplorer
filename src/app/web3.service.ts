@@ -17,7 +17,7 @@ export class Web3Service {
   public accountsObservable = new Subject<string[]>();
   web3Modal;
   web3js:  any;
-  provider: provider | undefined;
+  provider: any;
   accounts: string[] | undefined;
   balance: string | undefined;
   addresse: any;
@@ -67,6 +67,7 @@ export class Web3Service {
 
 
   async connectAccount() {
+    console.log('here')
     this.provider = await this.web3Modal.connect(); // set provider
     if (this.provider) {
       this.web3js = new Web3(this.provider);
@@ -100,8 +101,8 @@ export class Web3Service {
   }
 
   async disconnectWallet(){
-    // (window as any).ethereum._handleDisconnect()
-    // this.web3js.on("disconnect", handleDisconnect);
+    window.userWalletAddress = null;
+    window.ethereum = null
   }
 
 }

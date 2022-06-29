@@ -9,7 +9,11 @@
 <ng-container *ngIf="arrayofContractBnbBep20" >token BNB BEP 20 :<br><span *ngFor="let item of arrayofContractBnbBep20">{{item.value}}&nbsp;{{item.symbol}}<br></span></ng-container> -->
 <button (click)= "openMetaMask()" class="btn btn-primary" *ngIf="!walletWonnected" style="position: fixed; top: 20px;right: 20px;"> Connect Wallet</button>
 
-<button (click)= "disco()" class="btn btn-primary" *ngIf="walletWonnected" style="position: fixed; top: 20px;right: 20px;"> {{addr}}</button>
+<div class="btn-group" role="group" aria-label="First group" style="position: fixed; top: 20px;right: 20px;">
+  <button  class="btn btn-light" *ngIf="walletWonnected" > {{addr}}</button>
+  <button (click)= "disco()" class="btn btn-primary" *ngIf="walletWonnected" > LogOut</button>
+</div>
+
 
 <div class="card" style="width: 18rem;    margin-left: 50%;transform: translateX(-50%);margin-top: 20vh;
 ">
