@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {Web3Service} from '../web3.service';
 
 @Component({
   selector: 'app-home-page',
@@ -16,10 +17,27 @@ export class HomePageComponent implements OnInit {
   arrayofContractAvaxERC20:Array<any> = [];
   BnbAmount: any;
   arrayofContractBnbBep20:Array<any> = [];
+  walletWonnected: any;
 
-  constructor(private http : HttpClient) { }
+  constructor(private http : HttpClient, private Web3Service : Web3Service) { }
 
   ngOnInit(): void {
+    // this.walletWonnected = localStorage.getItem("WEB3_CONNECT_CACHED_PROVIDER")
+
+    this.Web3Service.getAccounts().then((response :any) => {
+      if (response){
+        this.walletWonnected = true
+        this.addr = response;
+        this.searchAddr();
+      } else {
+        this.walletWonnected = false
+      }
+    })
+  //  console.log(window.ethereum.selectedAddress)
+  //   if (this.walletWonnected) {
+  //     console.log(this.walletWonnected)
+  //   }
+
   }
 
   searchAddr(){
@@ -103,6 +121,31 @@ export class HomePageComponent implements OnInit {
     })
 
 
+  }
+
+  openMetaMask(){
+    this.Web3Service.connectAccount().then((response :any) => {
+      console.log(response);
+      this.addr = response;
+      this.walletWonnected = true
+      this.searchAddr();
+    }).catch((error: any) => {
+      console.error(error);
+    });
+  }
+
+  disco(){
+    // await provider.close();
+
+    // If the cached provider is not cleared,
+    // WalletConnect will default to the existing session
+    // and does not allow to re-scan the QR code with a new wallet.
+    // Depending on your use case you may want or want not his behavior.
+    //  this.Web3Service.web3Modal.clearCachedProvider();
+    //  this.Web3Service.disconnectWallet()
+    //  this.walletWonnected = false
+    //  window.location.reload();
+    // provider = null;
   }
 
 }
